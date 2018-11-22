@@ -1,2 +1,2 @@
-# roll_yield
+# Commodity Roll Yield Strategy
 A Python implementation of commodity roll yield strategy
