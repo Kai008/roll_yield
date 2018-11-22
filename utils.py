@@ -8,6 +8,8 @@ import pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar as calendar
 from pandas.tseries.offsets import BDay
 import datetime
+import quandl
+quandl.ApiConfig.api_key = "tjxFewEnckmn8zjjsHSZ"
 
 # Determine if a date is a holiday
 def is_holiday(date):
