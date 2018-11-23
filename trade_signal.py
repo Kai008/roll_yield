@@ -75,7 +75,7 @@ def trade_signal(signal_date,commodity,months_ahead):
     else:
         return -1
 
-    #Converts the date to the right format and fetches the first and seventh future
+    #Converts the date to the right format and fetches the near and far future
     if signal_date.month <10:
         signal_date_month_string = ''.join(["0",str(signal_date.month)])
     else:
