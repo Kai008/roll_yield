@@ -89,15 +89,21 @@ def trade_signal(signal_date,commodity,months_ahead):
     signal_date_string = ''.join(['"',str(signal_date.year),'-',signal_date_month_string,'-',signal_date_day_string,'"'])
 ##    print(signal_date_string)
 
-    near = quandl.get(near_commodity,start_date=signal_date_string,end_date=signal_date_string,returns="numpy")
-    for item in near:
-        near_price = float(item[4])
-##        print(near_price)
+    try:
+        near = quandl.get(near_commodity,start_date=signal_date_string,end_date=signal_date_string,returns="numpy")
+        for item in near:
+            near_price = float(item[4])
+##            print(near_price)
+    except:
+        return -4
 
-    far = quandl.get(far_commodity,start_date=signal_date_string,end_date=signal_date_string,returns="numpy")
-    for item in far:
-        far_price = float(item[4])
+    try:
+        far = quandl.get(far_commodity,start_date=signal_date_string,end_date=signal_date_string,returns="numpy")
+        for item in far:
+            far_price = float(item[4])
 ##        print(far_price)
+    except:
+        return -5
 
     #Figures out the dates of the the near and far futures, days between the two dates
     near_date = expiration_date(signal_date.year,signal_date.month)
@@ -115,5 +121,8 @@ def trade_signal(signal_date,commodity,months_ahead):
 ##    print(delta.days)
 
     #Calculates the signal and returns it
-    signal = (math.log(near_price) - math.log(far_price)) * 365 / delta.days
+    try:
+        signal = (math.log(near_price) - math.log(far_price)) * 365 / delta.days
+    except:
+        return -6
     return signal
