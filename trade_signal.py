@@ -12,7 +12,7 @@ def trade_signal(signal_date,commodity,months_ahead):
 
     #Confirms signal_date is not a business day or holiday
     if not is_business_day(signal_date) or (is_holiday(signal_date)):
-        return -1
+        return -2
 
     #Finds the near and far commodity ticker
     #Crude oil
@@ -73,7 +73,7 @@ def trade_signal(signal_date,commodity,months_ahead):
         far_commodity = ''.join(["CHRIS/LIFFE_EBM",str(months_ahead+1)])
     #Catch all for commodities not on the list
     else:
-        return -1
+        return -3
 
     #Converts the date to the right format and fetches the near and far future
     if signal_date.month <10:
@@ -86,7 +86,7 @@ def trade_signal(signal_date,commodity,months_ahead):
     else:
         signal_date_day_string = str(signal_date.day)
         
-    signal_date_string = ''.join(['"',str(signal_date.year),'-',str(signal_date.month),'-',signal_date_day_string,'"'])
+    signal_date_string = ''.join(['"',str(signal_date.year),'-',signal_date_month_string,'-',signal_date_day_string,'"'])
 ##    print(signal_date_string)
 
     near = quandl.get(near_commodity,start_date=signal_date_string,end_date=signal_date_string,returns="numpy")
