@@ -8,8 +8,6 @@ import pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar as calendar
 from pandas.tseries.offsets import BDay
 import datetime
-import quandl
-quandl.ApiConfig.api_key = "tjxFewEnckmn8zjjsHSZ"
 
 # Determine if a date is a holiday
 def is_holiday(date):
@@ -38,6 +36,15 @@ def last_business_nonholiday(date, num):
             date -= BDay(1)
     return date
 
+# Give the date that is "num" business days after a date. When counting forward, 
+# holidays does not count
+def next_business_nonholilday(date, num):
+    for i in range(num):
+        date += BDay(1)
+        while(is_holiday(date)):
+            date += BDay(1)
+    return date
+    
 # Give the expriation date of a given year and month    
 def expiration_date(year, month):
     t1 = datetime.datetime(year, month, 25)
