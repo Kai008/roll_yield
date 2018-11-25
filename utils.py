@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Nov 22 11:33:10 2018
-
-@author: Kai
+@author: Kai, Phil
 """
 import pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar as calendar
 from pandas.tseries.offsets import BDay
 import datetime
+from calendar import monthrange
+from dateutil.relativedelta import relativedelta
 
 # Determine if a date is a holiday
 def is_holiday(date):
@@ -45,18 +46,65 @@ def next_business_nonholilday(date, num):
             date += BDay(1)
     return date
     
-# Give the expriation date of a given year and month    
-def expiration_date(year, month):
-    t1 = datetime.datetime(year, month, 25)
-    if is_business_day(t1) and not is_holiday(t1):
-        exd = last_business_nonholiday(t1, 3)
+# Give the expriation date of a given year and month as per contract specs   
+def expiration_date(year,month,commodity):
+    if commodity == "WTI":
+        #CME WTI crude oil future
+        t1 = datetime.datetime(year, month, 25)
+        if is_business_day(t1) and not is_holiday(t1):
+            decrement = 3
+        else:
+            decrement = 4
+    elif commodity == "BRENT":
+        #ICE Brent oil future
+        days_in_month = monthrange(year,month)[1]
+        t1 = datetime.datetime(year,month,days_in_month)
+        if is_business_day(t1) and not is_holiday(t1):
+            decrement = 0
+        else:
+            decrement = 1
+    elif commodity == "NG":
+        #CME Henry Hub natural gas
+        days_in_month = monthrange(year,month)[1]
+        t1 = datetime.datetime(year,month,days_in_month)
+        if is_business_day(t1) and not is_holiday(t1):
+            decrement = 2
+        else:
+            decrement = 3
+    elif commodity == "UKNG":
+        #UK natural gas futures
+        days_in_month = monthrange(year,month)[1]
+        t1 = datetime.datetime(year,month,days_in_month)
+        if is_business_day(t1) and not is_holiday(t1):
+            decrement = 1
+        else:
+            decrement = 2
+    elif commodity == "RBOBGAS":
+        #RBOB gasoline
+        days_in_month = monthrange(year,month)[1]
+        t1 = datetime.datetime(year,month,days_in_month)
+        if is_business_day(t1) and not is_holiday(t1):
+            decrement = 0
+        else:
+            decrement = 1
+    elif commodity == "GASOIL":
+        #ICE gas oil futures
+        t1 = datetime.datetime(year, month, 14)
+        decrement = 2
+    elif commodity == "HEATOIL":
+        #NY Harbor heating oil
+        days_in_month = monthrange(year,month)[1]
+        t1 = datetime.datetime(year,month,days_in_month)
+        if is_business_day(t1) and not is_holiday(t1):
+            decrement = 0
+        else:
+            decrement = 1
     else:
-        exd = last_business_nonholiday(t1, 4)
-        
+        return -1
+    exd = last_business_nonholiday(t1,decrement)
     return exd
 
 #==============================================================================
 # for i in range(12, 0, -1):
 #     print(expiration_date(2014, i))
 #==============================================================================
-    
