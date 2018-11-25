@@ -105,9 +105,9 @@ def trade_signal(signal_date,commodity,months_ahead):
         return -5
 
     #Figures out the dates of the the near and far futures, days between the two dates
-    near_date = expiration_date(signal_date.year,signal_date.month)
+    near_date = expiration_date(signal_date.year,signal_date.month,commodity)
     far_date = near_date + relativedelta(months=+months_ahead)
-    far_date = expiration_date(far_date.year,far_date.month)
+    far_date = expiration_date(far_date.year,far_date.month,commodity)
 ##    print(near_date)
 ##    print(far_date)
     if near_date.date() <= signal_date:
