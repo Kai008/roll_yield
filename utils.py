@@ -10,6 +10,11 @@ import datetime
 from calendar import monthrange
 from dateutil.relativedelta import relativedelta
 
+#Increment the date by one month
+def one_month_later(date):
+    later_date = date + relativedelta(months=+1)
+    return later_date
+
 # Determine if a date is a holiday
 def is_holiday(date):
     cal = calendar()
