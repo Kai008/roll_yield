@@ -52,10 +52,9 @@ def trade_signal(signal_date,commodity,months_ahead):
         near_commodity = "CHRIS/ICE_G1"
         far_commodity = ''.join(["CHRIS/ICE_G",str(months_ahead+1)])
     elif commodity == "HEATOIL":
-        #Heating oil
-        #Only goes out to the fourth month (fifth future)
-        near_commodity = "CHRIS/ICE_O1"
-        far_commodity = ''.join(["CHRIS/ICE_O",str(months_ahead+1)])
+        #Heating oil, fixed to be a CME future but did not test
+        near_commodity = "CHRIS/CME_HO1"
+        far_commodity = ''.join(["CHRIS/CME_HO",str(months_ahead+1)])
     #Wheat
     elif commodity == "WHEAT":
         #Plain ol' wheat
