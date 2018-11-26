@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 23 15:50:57 2018
-@author: Kai
-"""
-
 from utils import (is_business_day, is_holiday, next_business_nonholilday, 
                    last_business_nonholiday, expiration_date, one_month_later)
 import pandas as pd
@@ -154,7 +148,3 @@ pnl_df = pd.DataFrame(pnl_ls, columns=['date', 'pnl'])
 
 output_name = ' '.join([first_commodity_name,second_commodity_name,start_date.strftime("%b %d, %Y"),"to",termination_date.strftime("%b %d, %Y"),'.csv'])
 pnl_df.to_csv(output_name)
-
-#==============================================================================
-#plt.plot(x=pnl_df['date'], y=pnl_df['pnl'])
-#==============================================================================
