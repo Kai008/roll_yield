@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import math
 
 #Simulation configuration
-start_date = pd.datetime(2002, 1, 1)
+start_date = pd.datetime(2010, 1, 1)
 termination_date = pd.datetime(2018, 11, 1)
 threshold = 0.02
 rebalance_period = 20
