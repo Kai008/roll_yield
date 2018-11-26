@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Nov 22 11:33:10 2018
-@author: Kai, Phil
+@author: Kai, Phil, Alicia, Bobby
 """
 import pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar as calendar
