@@ -86,6 +86,23 @@ def expiration_date(year,month,commodity):
             decrement = 1
         else:
             decrement = 2
+    elif commodity == "LIVECATTLE":
+        #Live Cattle
+        days_in_month = monthrange(year,month)[1]
+        t1 = datetime.datetime(year,month,days_in_month)
+        if is_business_day(t1) and not is_holiday(t1):
+            decrement = 0
+        else:
+            decrement = 1
+    elif commodity == "FEEDERCATTLE":
+        #Feeder Cattle
+        days_in_month = monthrange(year,month)[1]
+        t1 = datetime.datetime(year,month,days_in_month)
+        if is_business_day(t1) and not is_holiday(t1):
+            decrement = 1
+        else:
+            decrement = 2
+    
     elif commodity == "RBOBGAS":
         #RBOB gasoline
         days_in_month = monthrange(year,month)[1]
@@ -106,6 +123,24 @@ def expiration_date(year,month,commodity):
             decrement = 0
         else:
             decrement = 1
+    elif commodity == "COFFEE":
+        #Coffee C 
+        days_in_month = monthrange(year,month)[1]
+        t1 = datetime.datetime(year,month,days_in_month)
+        if is_business_day(t1) and not is_holiday(t1):
+            decrement = 7
+        else:
+            decrement = 8
+    elif commodity == "RCOFFEE":
+        #Robusta Coffee C 
+        days_in_month = monthrange(year,month)[1]
+        t1 = datetime.datetime(year,month,days_in_month)
+        if is_business_day(t1) and not is_holiday(t1):
+            decrement = 3
+        else:
+            decrement = 4
+    
+    
     else:
         return -1
     exd = last_business_nonholiday(t1,decrement)
