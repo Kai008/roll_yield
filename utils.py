@@ -93,7 +93,7 @@ def expiration_date(year,month,commodity):
         if is_business_day(t1) and not is_holiday(t1):
             decrement = 0
         else:
-            decrement = 1
+            decrement = 0
     elif commodity == "FEEDERCATTLE":
         #Feeder Cattle
         days_in_month = monthrange(year,month)[1]
